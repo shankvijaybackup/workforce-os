@@ -1,45 +1,29 @@
-# Workforce OS – Enterprise Telemetry & Intelligence
+# Workforce OS
 
-## Overview
-This repository implements the **first slice** of the enterprise‑grade Workforce OS platform described in the user's plan.  It focuses on:
-- Secure telemetry ingestion (REST endpoint with mTLS/JWT)
-- Cross‑platform agents (macOS & Windows) that collect non‑intrusive work context signals
-- Infrastructure as Code (Terraform) for AWS components: API Gateway, MSK, EKS, S3, PostgreSQL and ClickHouse
-- Privacy‑by‑Design Zero‑Knowledge encryption of telemetry payloads
-- Initial data schemas for tenant/configuration metadata and high‑frequency telemetry events
+Workforce OS is an enterprise-grade operational intelligence platform designed to map organizational friction without compromising employee privacy. It utilizes edge-level cryptography and deterministic heuristics to understand "Deep Work" versus "Administrative Fragmentation."
 
-## Repository Layout
-```
-workforce_os/
-│   README.md               # ← You are reading this
-│   LICENSE
-│
-├─ backend/
-│   ├─ api/
-│   │   └─ openapi.yaml     # OpenAPI contract for telemetry ingress
-│   ├─ app/
-│   │   └─ main.py          # FastAPI server stub
-│   └─ terraform/
-│       └─ main.tf          # Minimal IaC skeleton
-│
-├─ agents/
-│   ├─ macos/
-│   │   └─ telemetry_agent.py  # Python macOS agent skeleton
-│   └─ windows/
-│       └─ telemetry_agent.py  # Placeholder for future Windows implementation
-│
-└─ docs/
-    └─ design.md            # High‑level architecture & security design
-```
+## Enterprise Use Cases
 
-## Getting Started
-1. **Set up the workspace** – The repository lives under the default scratch directory.
-   ```bash
-   cd /Users/vijayshankar/.gemini/antigravity/scratch/workforce_os
-   ```
-2. **Deploy infrastructure** – See `backend/terraform/main.tf` for a Terraform entry point.
-3. **Run the API locally** – `python backend/app/main.py` (requires FastAPI & uvicorn).
-4. **Start the macOS agent** – `python agents/macos/telemetry_agent.py` (needs `pyobjc` for AppleScript interaction).
+### 1. Algorithmic Burnout Detection
+Identify systemic workflow fragmentation before your top engineers burn out. By tracking the mathematical entropy of keystrokes and context switches, Workforce OS can surface teams experiencing 400+ context switches a day without generating proportional deep work. 
+* **Key Metric:** Total Deep Work Hours vs Context Switches.
+
+### 2. Shadow IT & Tool Consolidation
+Discover exactly which SaaS applications drive collaboration and which are abandoned. Reclaim unused software licenses based on actual usage telemetry rather than self-reported surveys. 
+* **Key Metric:** Secure, localized Application Hash Dictionary aggregations.
+
+### 3. Zero-Surveillance Productivity Metrics
+We don't record screens, we don't log keystrokes, and we don't read emails. All context mapping is done via mathematical hashing and AES-256-GCM encryption at the absolute edge. Telemetry is securely decrypted in a volatile Go enclave and aggregated in ClickHouse.
+
+## Architecture
+1. **Sensors:** Native zero-knowledge agents for macOS (Rust/Darwin) and Windows (Rust/Win32).
+2. **Buffer:** AWS Kinesis for scalable, high-throughput ingestion.
+3. **Enclave:** Stateless Go worker pool executing volatile decryption.
+4. **Data Warehouse:** ClickHouse Materialized Views for temporal aggregations.
+5. **Dashboard:** Next.js App Router enforcing RBAC at the Vercel Edge.
+
+## Deployment
+Agents are distributed silently using MDM payloads (`.mobileconfig` for Jamf/Kandji) and WiX MSIs for Microsoft Intune. 
 
 ---
-*The next steps will flesh out the OpenAPI spec, Terraform resources, and the macOS telemetry agent implementation.*
+*Operational Intelligence. Zero Surveillance.*
