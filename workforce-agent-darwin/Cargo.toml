@@ -1,0 +1,15 @@
+[package]
+name = "workforce-agent-darwin"
+version = "1.0.0"
+edition = "2021"
+
+[dependencies]
+objc = "0.2"
+cocoa = "0.24"
+core-foundation = "0.9"
+
+[profile.release]
+opt-level = "z"     # Optimize for binary size
+lto = true          # Link Time Optimization for performance
+codegen-units = 1   # Maximum optimization
+panic = "abort"     # Reduce memory overhead

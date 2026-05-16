@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <!-- Replace UUIDs with generated GUIDs in your CI pipeline -->
+  <Product Id="*" Name="Workforce OS Telemetry Agent" Language="1033" Version="1.0.0.0" Manufacturer="Workforce OS" UpgradeCode="PUT-YOUR-GUID-HERE">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" />
+    <MajorUpgrade DowngradeErrorMessage="A newer version of Workforce OS is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="INSTALLFOLDER" Name="WorkforceOS" />
+      </Directory>
+      <!-- Offline Cache Directory -->
+      <Directory Id="CommonAppDataFolder">
+        <Directory Id="DataFolder" Name="WorkforceOS" />
+      </Directory>
+    </Directory>
+
+    <DirectoryRef Id="INSTALLFOLDER">
+      <Component Id="MainExecutable" Guid="PUT-YOUR-GUID-HERE" Win64="yes">
+        <File Id="AgentExe" Source="target\x86_64-pc-windows-msvc\release\workforce-agent-win32.exe" KeyPath="yes" />
+        
+        <!-- Windows SCM Registration -->
+        <ServiceInstall Id="ServiceInstaller" 
+                        Type="ownProcess" 
+                        Name="WorkforceOS_Telemetry" 
+                        DisplayName="Workforce OS Telemetry Sensor" 
+                        Description="Collects and cryptographically masks operational intelligence." 
+                        Start="auto" 
+                        Account="NT AUTHORITY\LocalService" 
+                        ErrorControl="normal" />
+                        
+        <ServiceControl Id="StartService" Start="install" Stop="both" Remove="uninstall" Name="WorkforceOS_Telemetry" Wait="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="DataFolder">
+      <Component Id="CacheFolderPermissions" Guid="PUT-YOUR-GUID-HERE">
+        <CreateFolder>
+          <!-- Ensure LocalService has write access for the SQLite WAL -->
+          <Permission User="LocalService" GenericAll="yes" />
+        </CreateFolder>
+      </Component>
+    </DirectoryRef>
+
+    <Feature Id="ProductFeature" Title="Workforce OS Agent" Level="1">
+      <ComponentRef Id="MainExecutable" />
+      <ComponentRef Id="CacheFolderPermissions" />
+    </Feature>
+  </Product>
+</Wix>

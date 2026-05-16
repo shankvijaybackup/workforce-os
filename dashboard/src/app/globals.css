@@ -1,0 +1,252 @@
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: sans-serif;
+}
+
+/* Dashboard Layout */
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 280px;
+  border-right: 2px solid #000;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-grow: 1;
+}
+
+.nav-link {
+  color: #000;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.nav-link:hover, .nav-link.active {
+  border-bottom: 2px solid #000;
+}
+
+.user-profile {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 2px solid #000;
+}
+
+.user-role {
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 3rem;
+  background-color: #fff;
+}
+
+/* Dashboard Content */
+.dashboard-header {
+  margin-bottom: 2rem;
+}
+
+.dashboard-header h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+}
+
+.alert-item {
+  border: 2px solid #000;
+  padding: 1rem;
+  font-weight: 500;
+  background-color: #fff;
+  position: relative;
+}
+
+.alert-item.critical::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    #000,
+    #000 5px,
+    #fff 5px,
+    #fff 10px
+  );
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.metric-card {
+  border: 2px solid #000;
+  padding: 1.5rem;
+}
+
+.metric-card h3 {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.metric-value {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+}
+
+.trend-down, .trend-up, .trend-neutral {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* Monochrome Charts */
+.chart-section {
+  border: 2px solid #000;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.chart-section h3 {
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+}
+
+.legend {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.swatch {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #000;
+}
+
+/* Patterns */
+.solid {
+  background-color: #000;
+}
+
+.striped {
+  background: repeating-linear-gradient(
+    45deg,
+    #000,
+    #000 4px,
+    #fff 4px,
+    #fff 8px
+  );
+}
+
+.hollow {
+  background-color: #fff;
+}
+
+.bar-wrapper {
+  display: flex;
+  height: 48px;
+  border: 2px solid #000;
+  width: 100%;
+}
+
+.bar-segment {
+  height: 100%;
+  border-right: 2px solid #000;
+}
+.bar-segment:last-child {
+  border-right: none;
+}
+
+/* Scatter Plot Mock */
+.scatter-plot-container {
+  height: 200px;
+  position: relative;
+  border-left: 2px solid #000;
+  border-bottom: 2px solid #000;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+}
+
+.scatter-axis {
+  position: absolute;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.y-axis {
+  left: -2rem;
+  bottom: 50%;
+  transform: rotate(-90deg);
+  transform-origin: left center;
+}
+
+.x-axis {
+  bottom: -1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.scatter-grid {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.plot-point {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #000;
+  border-radius: 50%;
+  transform: translate(-50%, 50%);
+}

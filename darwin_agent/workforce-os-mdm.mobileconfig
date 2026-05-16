@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>PayloadContent</key>
+    <array>
+        <!-- 1. PPPC: Grant Accessibility API Access -->
+        <dict>
+            <key>PayloadDisplayName</key>
+            <string>Workforce OS Privacy Permissions</string>
+            <key>PayloadIdentifier</key>
+            <string>com.workforceos.mdm.pppc</string>
+            <key>PayloadType</key>
+            <string>com.apple.TCC.configuration-profile-policy</string>
+            <key>PayloadUUID</key>
+            <string>GENERATE-UUID-1</string>
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+            <key>Services</key>
+            <dict>
+                <key>Accessibility</key>
+                <array>
+                    <dict>
+                        <key>Allowed</key>
+                        <true/>
+                        <key>CodeRequirement</key>
+                        <!-- Extract this from your signed binary using: codesign -dr - /path/to/binary -->
+                        <string>identifier "com.workforceos.darwin-agent" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "YOUR-APPLE-TEAM-ID"</string>
+                        <key>Identifier</key>
+                        <string>com.workforceos.darwin-agent</string>
+                        <key>IdentifierType</key>
+                        <string>bundleID</string>
+                    </dict>
+                </array>
+            </dict>
+        </dict>
+        <!-- 2. Background Task Management (macOS 13+) -->
+        <dict>
+            <key>PayloadDisplayName</key>
+            <string>Workforce OS Background Service</string>
+            <key>PayloadIdentifier</key>
+            <string>com.workforceos.mdm.servicemanagement</string>
+            <key>PayloadType</key>
+            <string>com.apple.servicemanagement</string>
+            <key>PayloadUUID</key>
+            <string>GENERATE-UUID-2</string>
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+            <key>Rules</key>
+            <array>
+                <dict>
+                    <key>RuleType</key>
+                    <string>BundleIdentifier</string>
+                    <key>RuleValue</key>
+                    <string>com.workforceos.darwin-agent</string>
+                    <key>Comment</key>
+                    <string>Allow Workforce OS to run silently in the background</string>
+                </dict>
+            </array>
+        </dict>
+    </array>
+    <key>PayloadDisplayName</key>
+    <string>Workforce OS Enterprise Configuration</string>
+    <key>PayloadIdentifier</key>
+    <string>com.workforceos.mdm.root</string>
+    <key>PayloadOrganization</key>
+    <string>Workforce OS</string>
+    <key>PayloadType</key>
+    <string>Configuration</string>
+    <key>PayloadUUID</key>
+    <string>GENERATE-ROOT-UUID</string>
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+</dict>
+</plist>

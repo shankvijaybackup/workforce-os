@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Telemetry Ingress Payload",
+  "type": "object",
+  "properties": {
+    "device_id": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": { "type": "number" }
+    }
+  },
+  "required": ["device_id", "timestamp", "metrics"],
+  "additionalProperties": false
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schema.internal/telemetry-ingress-v1.1.json",
+  "title": "Endpoint Telemetry Ingress v1.1",
+  "type": "object",
+  "required": ["event_id", "timestamp", "tenant_id", "identity", "device", "context", "metrics"],
+  "additionalProperties": false,
+  "properties": {
+    "event_id": { "type": "string", "format": "uuid" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "tenant_id": { "type": "string", "format": "uuid" },
+    "identity": {
+      "type": "object",
+      "required": ["user_id"],
+      "additionalProperties": false,
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "device": { "type": "object" },
+    "context": { "type": "object" },
+    "metrics": { "type": "object" }
+  }
+}

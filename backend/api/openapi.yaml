@@ -1,0 +1,94 @@
+openapi: 3.0.3
+info:
+  title: Workforce OS Telemetry Ingress API
+  version: 1.0.0
+  description: |-
+    Secure ingestion endpoint for cross‑platform telemetry agents. Supports mTLS and short‑lived JWT authentication.
+servers:
+  - url: https://api.example.com   # Replace with real gateway URL
+paths:
+  /v1/telemetry/ingress:
+    post:
+      summary: Ingest telemetry payloads from agents
+      security:
+        - mtls: []
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TelemetryPayload'
+      responses:
+        '202':
+          description: Payload accepted for processing
+        '400':
+          description: Invalid payload
+        '401':
+          description: Unauthorized – missing/invalid mTLS or JWT
+components:
+  securitySchemes:
+    mtls:
+      type: mutualTLS
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    TelemetryPayload:
+      type: object
+      required:
+        - event_id
+        - timestamp
+        - tenant_id
+        - device
+        - context
+        - metrics
+      properties:
+        event_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the telemetry event.
+        timestamp:
+          type: string
+          format: date-time
+          description: ISO‑8601 UTC timestamp when the event was generated.
+        tenant_id:
+          type: string
+          description: Tenant identifier controlling data segregation.
+        device:
+          type: object
+          required: [os_type, os_version, agent_version]
+          properties:
+            os_type:
+              type: string
+              enum: [darwin, win32]
+            os_version:
+              type: string
+            agent_version:
+              type: string
+            cpu_overhead_pct:
+              type: number
+            mem_overhead_mb:
+              type: number
+        context:
+          type: object
+          required: [active_app_bundle, window_title_hashed, category_inferred, duration_seconds]
+          properties:
+            active_app_bundle:
+              type: string
+            window_title_hashed:
+              type: string
+              description: SHA‑256 hash of the raw window title to preserve privacy.
+            category_inferred:
+              type: string
+            duration_seconds:
+              type: integer
+        metrics:
+          type: object
+          properties:
+            keystroke_entropy:
+              type: number
+            mouse_movement_distance:
+              type: number
+              nullable: true
