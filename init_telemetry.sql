@@ -5,7 +5,7 @@ CREATE TABLE telemetry_events (
     event_id UUID,
     tenant_id UUID,
     endpoint_id UUID,
-    os_type Enum8('darwin' = 1, 'win32' = 2),
+    os_type Enum8('darwin' = 1, 'win32' = 2, 'linux' = 3),
     app_bundle_hash FixedString(64),
     window_title_hash FixedString(64),
     duration_seconds UInt32,

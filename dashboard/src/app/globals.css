@@ -250,3 +250,45 @@ html, body {
   border-radius: 50%;
   transform: translate(-50%, 50%);
 }
+
+/* Tables */
+.table-container {
+  overflow-x: auto;
+  border: 2px solid #000;
+  margin-bottom: 2rem;
+}
+
+.monochrome-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.monochrome-table th, .monochrome-table td {
+  padding: 1rem;
+  border-bottom: 2px solid #000;
+}
+
+.monochrome-table th {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.875rem;
+  background-color: #f8f8f8;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 2px solid #000;
+}
+.status-badge.solid {
+  background-color: #000;
+  color: #fff;
+}
+.status-badge.hollow {
+  background-color: #fff;
+  color: #000;
+}

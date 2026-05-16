@@ -21,7 +21,8 @@ export default function RootLayout({
           <aside className="sidebar">
             <h1 className="brand">WORKFORCE OS</h1>
             <nav className="nav-links">
-              <a href="#" className="nav-link active">Deep Work Analytics</a>
+              <a href="/" className="nav-link">Deep Work Analytics</a>
+              <a href="/endpoints" className="nav-link active">Active Endpoints</a>
               <a href="#" className="nav-link">Context Switch Scatter</a>
               <a href="#" className="nav-link">Organizational Units</a>
             </nav>
